@@ -90,9 +90,9 @@
 	<h1 class="text-4xl">Message</h1>
 	<div class="grid grid-cols-5 gap-2">
 		{#each posts as item}
-			<div class="w-full border rounded flex items-center p-2" transition:fly>
-				<div class="flex-1">
-					<div class="text-sm">
+			<div class="w-full border rounded flex p-2" transition:fly>
+				<div class="flex-1 w-full h-full flex flex-col justify-between">
+					<div class="text-sm break-words w-full">
 						{item.content}
 					</div>
 					<div class="text-xs text-gray-500">
