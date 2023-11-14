@@ -3,6 +3,7 @@
 	import relativeTime from 'dayjs/plugin/relativeTime';
 	import { onMount } from 'svelte';
 	import { slide, fly } from 'svelte/transition';
+  import { PUBLIC_API_URL } from '$env/static/public';
 
 	dayjs.extend(relativeTime);
 
@@ -25,7 +26,7 @@
 			return;
 		}
     loading = true;
-		const response = await fetch('http://localhost:3000/post', {
+		const response = await fetch(`${PUBLIC_API_URL}/post`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -45,7 +46,7 @@
 	};
 
 	const getPosts = async () => {
-		const response = await fetch('http://localhost:3000/posts');
+		const response = await fetch(`${PUBLIC_API_URL}/posts`);
 		if (!response.ok) {
 			errorMessage = 'Something went wrong';
 			return;
@@ -58,6 +59,10 @@
 		getPosts();
 	});
 </script>
+
+<div class="absolute bottom-4 right-4 text-slate-50/30">
+  by T0NG
+</div>
 
 <div class="w-full flex items-center my-20 flex-col gap-2">
 	<h1 class="text-4xl">MoOo</h1>
@@ -86,7 +91,7 @@
 	<div class="grid grid-cols-5 gap-2">
 		{#each posts as item}
 			<div class="w-full border rounded flex items-center p-2" transition:fly>
-				<div class="flex-1 ml-2">
+				<div class="flex-1">
 					<div class="text-sm">
 						{item.content}
 					</div>
